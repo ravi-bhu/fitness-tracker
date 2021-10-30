@@ -1,21 +1,21 @@
-import {Subject} from "rxjs";
+import { Subject } from 'rxjs';
 
-import {User} from "./user.model";
-import {AuthData} from "./auth-data.model";
-import {Injectable} from "@angular/core";
-import {Router} from "@angular/router";
+import { User } from './user.model';
+import { AuthData } from './auth-data.model';
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthService {
   authChange = new Subject<boolean>();
-  private user: User;
+  private user: User | null = null;
 
-  constructor(private router: Router){ }
+  constructor(private router: Router) {}
 
   registerUser(authData: AuthData) {
     this.user = {
       email: authData.email,
-      userId: Math.round(Math.random() * 10000).toString()
+      userId: Math.round(Math.random() * 10000).toString(),
     };
     this.authSuccessfully();
   }
@@ -23,7 +23,7 @@ export class AuthService {
   login(authData: AuthData) {
     this.user = {
       email: authData.email,
-      userId: Math.round(Math.random() * 10000).toString()
+      userId: Math.round(Math.random() * 10000).toString(),
     };
     this.authSuccessfully();
   }
